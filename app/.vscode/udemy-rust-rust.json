@@ -1,0 +1,12 @@
+{
+	"extensions": [
+		"1yib.rust-bundle",
+		"dustypomerleau.rust-syntax",
+		"github.copilot",
+		"github.copilot-chat",
+		"github.vscode-pull-request-github",
+		"rust-lang.rust-analyzer",
+		"serayuzgur.crates"
+	],
+	"workspaceFolder": "/app"
+}
