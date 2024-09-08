@@ -1,8 +1,12 @@
 {
     "[rust]": {
-        "editor.defaultFormatter": "rust-lang.rust-analyzer"
+        "editor.defaultFormatter": "rust-lang.rust-analyzer",
+        "editor.semanticHighlighting.enabled": false,
     },
     "[json]": {
         "editor.defaultFormatter": "vscode.json-language-features"
-    }
+    },
+    "editor.inlayHints.enabled": "on",
+    "editor.formatOnSave": true,
+    "rust-analyzer.checkOnSave": true
 }
