@@ -1,34 +1,16 @@
 fn main() {
-    let vec_1 = vec![1, 2, 3];
-    takes_ownership(vec_1.clone());
-    println!("vec_1 is: {:?}", vec_1);
+    let mut some_data = 42;
+    let ref_1 = &mut some_data;
+    let deref_copy = *ref_1;
+    *ref_1 = 13;
+    println!("some_data is: {some_data}, deref_copy is: {deref_copy}");
 
-    let vec_2 = gives_ownership();
-    println!("vec_2 is: {:?}", vec_2);
+    let mut heap_data = vec![5, 6, 7];
+    let ref_1 = &heap_data;
+    let ref_2 = ref_1;
+    let ref_3 = ref_1;
+    let deref_copy = ref_1.clone();
 
-    let vec_3 = takes_and_gives_back_ownership(vec_2);
-    // println!("vec_2 is: {:?}", vec_2);
-    println!("vec_3 is: {:?}", vec_3);
-
-    let x = 10;
-    stack_function(x);
-    println!("In main, x is: {x}");
-}
-
-fn takes_ownership(vec: Vec<i32>) {
-    println!("vec is: {:?}", vec);
-}
-
-fn gives_ownership() -> Vec<i32> {
-    vec![4, 5, 6]
-}
-
-fn takes_and_gives_back_ownership(mut vec: Vec<i32>) -> Vec<i32> {
-    vec.push(10);
-    vec
-}
-
-fn stack_function(mut var: i32) {
-    var = 56;
-    println!("var is: {}", var);
+    let move_out = ref_1;
+    //let move_out_again = ref_1;
 }
