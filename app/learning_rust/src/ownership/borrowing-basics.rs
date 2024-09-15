@@ -13,4 +13,9 @@ fn main() {
         vec_3
     };
     println!("vec_2: {:?}", vec_2);
+
+    let tuple = (String::from("Hello"), 42);
+    // let (s, num) = tuple;
+    let (s, num) = &tuple;
+    let (s, num) = tuple;
 }
