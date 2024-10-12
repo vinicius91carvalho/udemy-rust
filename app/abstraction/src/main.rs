@@ -1,78 +1,59 @@
-struct DrawingInfo {
-    line_width: u8,
-    color: String,
+trait Addition<Rhs, Output> {
+    fn add(self, rhs: Rhs) -> Output;
 }
 
-struct Square {
-    side: f32,
-    info: DrawingInfo,
+struct Point {
+    x: i32,
+    y: i32,
 }
 
-struct Rectangle {
-    length: f32,
-    width: f32,
-    info: DrawingInfo,
-}
-
-// impl Square {
-//     fn calculate_area(&self) {
-//         println!("The area is: {}", self.side * self.side);
-//     }
-// }
-
-// impl Rectangle {
-//     fn area(&self) -> f32 {
-//         self.length * self.width
-//     }
-// }
-
-trait Shape {
-    fn area(&self) -> f32;
-    fn perimeter(&self) -> f32 {
-        println!("Perimeter not implemented, returning dummy value");
-        0.0
+impl Addition<Point, Point> for Point {
+    fn add(self, rhs: Point) -> Point {
+        Point {
+            x: self.x + rhs.x,
+            y: self.y + rhs.y,
+        }
     }
 }
 
-impl Shape for Rectangle {
-    fn area(&self) -> f32 {
-        let area_of_rect = self.length * self.width;
-        println!("Rectangle area: {}", area_of_rect);
-        area_of_rect
-    }
-
-    fn perimeter(&self) -> f32 {
-        let perimeter_of_rect = 2.0 * (self.length + self.width);
-        println!("Rectangle Perimeter: {}", perimeter_of_rect);
-        perimeter_of_rect
+impl Addition<i32, Point> for Point {
+    fn add(self, rhs: i32) -> Point {
+        Point {
+            x: self.x + rhs,
+            y: self.y + rhs,
+        }
     }
 }
 
-impl Shape for Square {
-    fn area(&self) -> f32 {
-        let area_of_square = self.side * self.side;
-        println!("Square area: {}", area_of_square);
-        area_of_square
+struct Line {
+    start: Point,
+    end: Point,
+}
+
+impl Addition<Point, Line> for Point {
+    fn add(self, rhs: Point) -> Line {
+        Line {
+            start: self,
+            end: rhs,
+        }
     }
 }
 
 fn main() {
-    let r1 = Rectangle {
-        width: 5.0,
-        length: 4.0,
-        line_width: 1,
-        color: String::from("Red"),
-    };
+    let p1 = Point { x: 1, y: 1 };
+    let p2 = Point { x: 2, y: 2 };
+    let p3: Point = p1.add(p2);
 
-    let s1 = Square {
-        side: 3.2,
-        line_width: 1,
-        color: String::from("Red"),
-    };
+    assert_eq!(p3.x, 3);
+    assert_eq!(p3.y, 3);
 
-    r1.area();
-    s1.area();
+    let p1 = Point { x: 1, y: 1 };
+    let p3 = p1.add(2);
+    assert_eq!(p3.x, 3);
+    assert_eq!(p3.y, 3);
 
-    r1.perimeter();
-    s1.perimeter();
+    let p1 = Point { x: 1, y: 1 };
+    let p2 = Point { x: 2, y: 2 };
+    let line: Line = p1.add(p2);
+    assert!(line.start.x == 1 && line.start.y == 1 && line.end.x == 2 && line.end.y == 2);
 }
