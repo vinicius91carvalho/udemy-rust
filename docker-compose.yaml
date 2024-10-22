@@ -1,6 +1,6 @@
 services:
   rust:
-    container_name: rust
+    container_name: udemy-rust
     build:
       context: .
       dockerfile: Dockerfile

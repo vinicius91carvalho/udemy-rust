@@ -1,59 +1,43 @@
-struct Book {
-    title: String,
-    author: String,
-    genre: String,
-}
-
-// struct BookIterator {
-//     properties: Vec<String>,
-// }
-
-// impl Iterator for BookIterator {
-//     type Item = String;
-
-//     fn next(&mut self) -> Option<Self::Item> {
-//         if !self.properties.is_empty() {
-//             Some(self.properties.remove(0))
-//         } else {
-//             None
-//         }
-//     }
-// }
-
-// impl IntoIterator for Book {
-//     type Item = String;
-//     type IntoIter = BookIterator;
-
-//     fn into_iter(self) -> Self::IntoIter {
-//         BookIterator {
-//             properties: vec![self.title, self.author, self.genre],
-//         }
-//     }
-// }
-
-impl IntoIterator for Book {
-    type Item = String;
-    type IntoIter = std::vec::IntoIter<Self::Item>;
-
-    fn into_iter(self) -> Self::IntoIter {
-        vec![self.title, self.author, self.genre].into_iter()
-    }
-}
-
 fn main() {
-    let book = Book {
-        title: "Digital Image Processing".to_string(),
-        author: "Gonzales".to_string(),
-        genre: "Science Book".to_string(),
-    };
+    let some_product = Some("laptop");
+    let mut products = vec!["cellphone", "battery", "charger"];
 
-    let mut book_iterator = book.into_iter();
-    // println!("{:?}", book_iterator.next());
-    // println!("{:?}", book_iterator.next());
-    // println!("{:?}", book_iterator.next());
-    // println!("{:?}", book_iterator.next());
+    // match some_product {
+    //     Some(product) => products.push(product),
+    //     _ => {}
+    // }
 
-    for book_info in book_iterator {
-        println!("{book_info}")
+    // if let Some(product) = some_product {
+    //     products.push(product);
+    // }
+
+    // products.extend(some_product);
+
+    // let products_iter = products.iter().chain(some_product.iter());
+
+    // for prod in products_iter {
+    //     println!("{}", prod);
+    // }
+
+    // println!("{:?}", products);
+
+    let products = vec![Some("charger"), Some("battery"), None, Some("cellphone")];
+    let mut prod_without_none = Vec::new();
+
+    for p in &products {
+        if p.is_some() {
+            prod_without_none.push(p.unwrap());
+        }
     }
+
+    // let prod_without_none = &products
+    //     .into_iter()
+    //     .filter(|x| x.is_some())
+    //     .map(|x| x.unwrap())
+    //     .collect::<Vec<&str>>();
+
+    // println!("{:?}", prod_without_none);
+
+    let prod_without_none = products.into_iter().flatten().collect::<Vec<&str>>();
+    println!("{:?}", prod_without_none);
 }
