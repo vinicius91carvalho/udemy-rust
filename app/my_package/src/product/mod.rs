@@ -1,3 +1,5 @@
+mod category;
+
 pub use category::Category;
 
 /// Struct for storing product related information.
@@ -8,8 +10,6 @@ pub struct Product {
     price: f64,
     category: Category,
 }
-
-mod category;
 
 impl Product {
     fn calculate_tax(&self) -> f64 {

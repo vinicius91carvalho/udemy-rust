@@ -27,7 +27,7 @@ fn main() {
         let banned_user_name = &banned_user;
         return name != banned_user_name && name.len() != 0;
     };
-    //println!("{banned_user}");
+    // println!("{banned_user}");
 
     let validate_user_advance = |age: u8| age >= 30;
     println!(
